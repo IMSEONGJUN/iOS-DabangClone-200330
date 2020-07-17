@@ -16,46 +16,46 @@ protocol RoomInfoCellDelegate: class {
 class RoomInfoCell: UITableViewCell {
     static let identifier = "RoomInfoCell"
 
-    // MARK: - Properties
     
+    // MARK: - Properties
     var data: DabangElement! {
         didSet{
             reConfigureCell()
         }
     }
     
-    var isMarked: Bool {
+    private var isMarked: Bool {
         return heartButton.isSelected
     }
     
     weak var delegate: RoomInfoCellDelegate?
     
-    let checkButtonToCompare = UIButton()
+    private let checkButtonToCompare = UIButton()
     
     let overralContainerView = UIView()
     
-    lazy var infoStackView = UIStackView(arrangedSubviews: [nameLabel, priceLabel, infoLabel, detailLabel, etceteraStackView])
+    private lazy var infoStackView = UIStackView(arrangedSubviews: [nameLabel, priceLabel, infoLabel, detailLabel, etceteraStackView])
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         return label
     }()
     
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
-    let detailLabel: UILabel = {
+    private let detailLabel: UILabel = {
        let label = UILabel()
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
@@ -63,10 +63,10 @@ class RoomInfoCell: UITableViewCell {
         return label
     }()
     
-    let etceteraStackView = UIStackView()
-    var etceteraArray = [String]()
+    private let etceteraStackView = UIStackView()
+    private var etceteraArray = [String]()
     
-    let roomImageView = UIImageView()
+    private let roomImageView = UIImageView()
     
     let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
     lazy var heartButton: UIButton = {
@@ -85,8 +85,8 @@ class RoomInfoCell: UITableViewCell {
         }
     }
   
-    // MARK: - Life Cycle
     
+    // MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureCheckButton()
@@ -106,8 +106,8 @@ class RoomInfoCell: UITableViewCell {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Setup
     
+    // MARK: - Setup
     private func reConfigureCell() {
         self.nameLabel.text = data.name
         
@@ -144,7 +144,8 @@ class RoomInfoCell: UITableViewCell {
         var totalWidthOfEtc:CGFloat = 0
         var shouldStop = false
         
-        etceteraArray.map{ (word) -> UILabel in
+        etceteraArray
+            .map{ (word) -> UILabel in
             let label = UILabel()
             guard shouldStop == false else { label.text = ""; return label}
             label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
@@ -162,7 +163,8 @@ class RoomInfoCell: UITableViewCell {
             }
             label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             return label
-        }.forEach{ etceteraStackView.addArrangedSubview($0) }
+            }
+            .forEach{ etceteraStackView.addArrangedSubview($0) }
     }
     
     private func configureInfoStackView() {
@@ -174,7 +176,6 @@ class RoomInfoCell: UITableViewCell {
         infoStackView.snp.makeConstraints {
             $0.width.equalTo(200)
         }
-        
     }
     
     private func configureCheckButton() {
@@ -257,8 +258,8 @@ class RoomInfoCell: UITableViewCell {
         self.data = roomInfo
     }
     
-    // MARK: - Action Handler
     
+    // MARK: - Action Handler
     @objc private func didTapHeartButton(_ sender: UIButton) {
         heartButton.isSelected.toggle()
         if isMarked {

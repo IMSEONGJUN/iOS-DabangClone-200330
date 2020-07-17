@@ -23,15 +23,15 @@ class BudongsanInfoCell: UITableViewCell {
         }
     }
     
-    var roomInfoCell = RoomInfoCell()
+    private var roomInfoCell = RoomInfoCell()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         return label
     }()
     
-    let roomCountButton: UIButton = {
+    private let roomCountButton: UIButton = {
        let btn = UIButton()
         btn.layer.borderColor = UIColor.lightGray.cgColor
         btn.layer.borderWidth = 1
@@ -43,7 +43,7 @@ class BudongsanInfoCell: UITableViewCell {
         return btn
     }()
     
-    let profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
        let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "MartIcon")
         iv.clipsToBounds = true
@@ -52,7 +52,7 @@ class BudongsanInfoCell: UITableViewCell {
         return iv
     }()
     
-    let separatorLine: UIView = {
+    private let separatorLine: UIView = {
        let view = UIView()
         view.backgroundColor = .lightGray
         return view

@@ -12,8 +12,8 @@ import RxSwift
 
 class RoomsInComplexController: UIViewController {
 
-    let tableView = UITableView()
-    var disposeBag = DisposeBag()
+    private let tableView = UITableView()
+    private var disposeBag = DisposeBag()
     var roomsPK = [Int]() {
         didSet{
             subscribeDataSource()
@@ -59,10 +59,8 @@ class RoomsInComplexController: UIViewController {
                 guard let self = self else { return }
                 if self.rooms == nil {
                     self.rooms = [DabangElement]()
-                    self.rooms?.append($0)
-                } else {
-                    self.rooms?.append($0)
                 }
+                self.rooms?.append($0)
             })
             .disposed(by: disposeBag)
         })

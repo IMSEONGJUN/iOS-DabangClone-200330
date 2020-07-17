@@ -13,8 +13,8 @@ class CompareViewController: UIViewController {
 
     // MARK: - Peroperties
     
-    let noticeView = UIView()
-    let noticeLabel = UILabel()
+    private let noticeView = UIView()
+    private let noticeLabel = UILabel()
     
     var roomsToCompare: [Int : DabangElement]! {
         didSet{
@@ -23,15 +23,15 @@ class CompareViewController: UIViewController {
         }
     }
     
-    var compareValues = [DabangElement]()
-    lazy var compareValuesCount = self.compareValues.count
+    private var compareValues = [DabangElement]()
+    private lazy var compareValuesCount = self.compareValues.count
     
-    let overralScrollView = UIScrollView()
-    let detailScrollView = UIScrollView()
+    private let overralScrollView = UIScrollView()
+    private let detailScrollView = UIScrollView()
     
-    var askButton1 = CompareViewAskButton()
-    var askButton2 = CompareViewAskButton()
-    var askButton3 = CompareViewAskButton()
+    private var askButton1 = CompareViewAskButton()
+    private var askButton2 = CompareViewAskButton()
+    private var askButton3 = CompareViewAskButton()
     
     
     // MARK: - Life cycle
@@ -169,7 +169,7 @@ class CompareViewController: UIViewController {
         
     // MARK: - Action Handler
     
-    @objc func didTapAskButton(_ sender: UIButton) {
+    @objc private func didTapAskButton(_ sender: UIButton) {
         let roomID = self.compareValues[sender.tag].pk
         let brokerData = self.compareValues[sender.tag].broker
         let brokerInfoVC = BrokerInfoPopUpVC()
@@ -179,7 +179,7 @@ class CompareViewController: UIViewController {
         present(brokerInfoVC, animated: true)
     }
     
-    @objc func didTapCloseButton() {
+    @objc private func didTapCloseButton() {
         dismiss(animated: true)
     }
 }

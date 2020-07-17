@@ -31,15 +31,15 @@ final class FavoriteViewModel {
         }
     }
     
-    lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
+    lazy var activeData: FavoriteData = .checkedRoomInfo(checkedRoomData)
     
     init() {
         print("FavoViewModel init")
         fetchRecentlyCheckedRooms()
-        fetchCheckedComplex()
-        fetchMarkedRooms()
-        fetchMarkedComplex()
-        fetchContactedBrokersData()
+//        fetchCheckedComplex()
+//        fetchMarkedRooms()
+//        fetchMarkedComplex()
+//        fetchContactedBrokersData()
     }
     
     func tempLocalCreateUser() {
@@ -125,7 +125,6 @@ final class FavoriteViewModel {
     }
     
     private func setActiveData(_ dataIndex: Int) {
-        APIManager.shared.cancelAllRequest()
         switch dataIndex {
         case 0:
             self.activeData = FavoriteData.checkedRoomInfo(self.checkedRoomData)

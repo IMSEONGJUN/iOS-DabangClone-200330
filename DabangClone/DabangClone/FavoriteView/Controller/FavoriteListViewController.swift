@@ -14,28 +14,27 @@ import RxCocoa
 class FavoriteListViewController: UIViewController {
     
     // MARK: - Properties
-
-    let scrollView = UIScrollView()
-    let tableView = UITableView()
-    lazy var selectButtons = [recentlyCheckedRoom, recentlyCheckedDanzi, markedRoom, markedDanzi,contactedBudongsan]
+    private let scrollView = UIScrollView()
+    private let tableView = UITableView()
+    private lazy var selectButtons = [recentlyCheckedRoom, recentlyCheckedDanzi, markedRoom, markedDanzi,contactedBudongsan]
     
-    var stackView: UIStackView!
-    let recentlyCheckedRoom = FavoSelectButton(title: "최근 본 방", tag: 0)
-    let recentlyCheckedDanzi = FavoSelectButton(title: "최근 본 단지", tag: 1)
-    let markedRoom = FavoSelectButton(title: "찜한 방", tag: 2)
-    let markedDanzi = FavoSelectButton(title: "찜한 단지", tag: 3)
-    let contactedBudongsan = FavoSelectButton(title: "연락한 부동산", tag: 4)
+    private var stackView: UIStackView!
+    private let recentlyCheckedRoom = FavoSelectButton(title: "최근 본 방", tag: 0)
+    private let recentlyCheckedDanzi = FavoSelectButton(title: "최근 본 단지", tag: 1)
+    private let markedRoom = FavoSelectButton(title: "찜한 방", tag: 2)
+    private let markedDanzi = FavoSelectButton(title: "찜한 단지", tag: 3)
+    private let contactedBudongsan = FavoSelectButton(title: "연락한 부동산", tag: 4)
     
-    let separatorViewUpperScrollView = UIView()
-    let separatorViewUnderScrollView = UIView()
-    var compareView: CompareView!
-    let moveToCompareVCButton = UIButton()
+    private let separatorViewUpperScrollView = UIView()
+    private let separatorViewUnderScrollView = UIView()
+    private var compareView: CompareView!
+    private let moveToCompareVCButton = UIButton()
     
-    var isInitial = true
-    var viewModel = FavoriteViewModel()
-    var underSeparatorHeightConst: NSLayoutConstraint!
+    private var isInitial = true
+    private var viewModel = FavoriteViewModel()
+    private var underSeparatorHeightConst: NSLayoutConstraint!
     
-    var currentTag = 0 {
+    private var currentTag = 0 {
         didSet {
             if currentTag != 2 {
                 resetCompareMode()
@@ -57,7 +56,7 @@ class FavoriteListViewController: UIViewController {
     }
     
     
-    var roomsToCompare = [Int : DabangElement]() {
+    private var roomsToCompare = [Int : DabangElement]() {
         didSet{
             if roomsToCompare.count > 1 {
                 moveToCompareVCButton.backgroundColor = #colorLiteral(red: 0.2596234679, green: 0.5155771971, blue: 0.9926976562, alpha: 1)
@@ -68,7 +67,7 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
-    var isCompareMode = false {
+    private var isCompareMode = false {
         didSet {
             if isCompareMode && currentTag == 2 {
                 NotificationCenter.default.post(name: FavoriteListViewController.compareModeOn, object: nil)
@@ -80,7 +79,6 @@ class FavoriteListViewController: UIViewController {
     
     
     // MARK: - Life cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -109,8 +107,8 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
-    // MARK: - Initial Setup
     
+    // MARK: - Initial Setup
     private func setNavigationBar() {
         title = "관심 목록"
         let navigationAppearance = UINavigationBarAppearance()
@@ -237,8 +235,8 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
-    // MARK: - Action Handler
     
+    // MARK: - Action Handler
     private func resetCompareMode() {
         isCompareMode = false
         compareView.compareButton.isSelected = false
@@ -315,10 +313,7 @@ class FavoriteListViewController: UIViewController {
 }
 
 
-
-
-    // MARK: - UITableViewDataSource
-
+// MARK: - UITableViewDataSource
 extension FavoriteListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.checkActiveDataCount()
@@ -329,8 +324,8 @@ extension FavoriteListViewController: UITableViewDataSource {
     }
 }
 
-    // MARK: - UITableViewDelegate
 
+// MARK: - UITableViewDelegate
 extension FavoriteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let roomCell = tableView.cellForRow(at: indexPath) as? RoomInfoCell {
@@ -356,8 +351,8 @@ extension FavoriteListViewController: UITableViewDelegate {
     }
 }
 
-    // MARK: - Custom Delegates
 
+// MARK: - Custom Delegates
 extension FavoriteListViewController: FavoSelectButtonDelegate {
     private func controlAtrributes(_ tag: Int) {
         self.underSeparatorHeightConst.constant = 0.5
@@ -432,14 +427,6 @@ extension FavoriteListViewController: DanziInfoCellDelegate {
     func didTapAvailableRoomsButtons(roomsPk: [Int]) {
         let vc = RoomsInComplexController()
         vc.roomsPK = roomsPk
-        //        vc.rooms = data
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func didTapAvailableRoomsButtons() {
-        print("delegate response")
-        let vc = RoomsInComplexController()
-//        vc.rooms = data
         navigationController?.pushViewController(vc, animated: true)
     }
     

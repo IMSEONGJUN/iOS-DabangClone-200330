@@ -31,6 +31,12 @@ final class APIManager {
     
     // MARK: - Properties
     static let shared = APIManager()
+    private var request: DataRequest? {
+        didSet {
+            oldValue?.cancel()
+        }
+    }
+    
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
     private let networkAccessManager = NetworkReachabilityManager(host: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
@@ -87,8 +93,8 @@ final class APIManager {
     //GET: 유저 정보
     func getUserProfile(userPK: Int? = nil, completion: @escaping (Result<User, Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        AF.request( baseURL + "/members/\(String(describing: userPK))/", headers: header)
-            .responseDecodable(of: User.self) { (response) in
+        self.request = AF.request( baseURL + "/members/\(String(describing: userPK))/", headers: header)
+        self.request?.responseDecodable(of: User.self) { (response) in
                 switch response.result {
                 case .success(let user):
                     print("success")
@@ -115,8 +121,8 @@ final class APIManager {
     
     //GET: pk를 기준으로 특정 방 1개
     func getCertainRoomData(pk: Int, completion: @escaping (Result<DabangElement, Error>) -> Void) {
-        AF.request( baseURL + "/posts/\(pk)/" )
-            .responseDecodable(of: DabangElement.self) { (response) in
+        request = AF.request( baseURL + "/posts/\(pk)/" )
+        request?.responseDecodable(of: DabangElement.self) { (response) in
                 switch response.result {
                 case .success(let room):
                     completion(.success(room))
@@ -127,11 +133,12 @@ final class APIManager {
     }
     //GET: pk를 기준으로 특정 방 1개 <Rx>
     func rxGetCertainRoomData(pk: Int) -> Observable<DabangElement>{
-        return Observable.create() { observer in
+        return Observable<DabangElement>.create() { observer in
             self.getCertainRoomData(pk: pk) { (result) in
                 switch result {
                 case .success(let room):
                     observer.onNext(room)
+                    observer.onCompleted()
                 case .failure(let error):
                     print("Emitted Error")
                     observer.onError(error)
@@ -144,8 +151,8 @@ final class APIManager {
     //GET: 최근 본 방 리스트
     func getRecentlyCheckedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        AF.request( baseURL + "/members/recentlyPosts/", method: .get, headers: header)
-          .responseDecodable(of: CheckedRoom.self) { (response) in
+        self.request = AF.request( baseURL + "/members/recentlyPosts/", method: .get, headers: header)
+        self.request?.responseDecodable(of: CheckedRoom.self) { (response) in
                 switch response.result {
                 case .success(let rooms):
                     completion(.success(rooms.posts ?? []))
@@ -159,9 +166,9 @@ final class APIManager {
     //GET: 찜한 방 리스트
     func getMarkedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        AF.request( baseURL + "/members/postlike/", method: .get, headers: header)
-          .responseDecodable(of: [DabangElement].self) { (response) in
-            print("status: ", response.response!.statusCode)
+        self.request = AF.request( baseURL + "/members/postlike/", method: .get, headers: header)
+        self.request?.responseDecodable(of: [DabangElement].self) { (response) in
+            print("status: ", response.response?.statusCode)
                 switch response.result {
                 case .success(let rooms):
 //                    let markedRooms = rooms.postLike?.map{$0.post} ?? []
@@ -380,7 +387,8 @@ final class APIManager {
   
   //GET: id를 기준으로 특정 분양 1개
   func getCertainSaleData(id: Int, completion: @escaping (Result<SaleInfo, Error>) -> Void) {
-    AF.request( baseURL + "/presales/" + "\(id)" + "/", method: .get).responseDecodable(of: SaleInfo.self) { (response) in
+    AF.request( baseURL + "/presales/" + "\(id)" + "/", method: .get)
+        .responseDecodable(of: SaleInfo.self) { (response) in
       switch response.result {
       case .success(let sale):
         completion(.success(sale))
@@ -394,7 +402,7 @@ final class APIManager {
   func getCertainThemeData(pk: Int, completion: @escaping (Result<DabangElement, Error>) -> Void) {
       let parameter = ["pk" : pk]
       AF.request( baseURL + "/posts/list/", parameters: parameter)
-          .responseDecodable(of: DabangElement.self) { (response) in
+        .responseDecodable(of: DabangElement.self) { (response) in
               switch response.result {
               case .success(let room):
                   completion(.success(room))
@@ -415,8 +423,8 @@ final class APIManager {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    let pk = json["pk"]
-                    let email = json["email"]
+                    let pk = json["pk"].intValue
+                    let email = json["email"].stringValue
                     completion("pkNumber: \(pk)\n email: \(email)", true)
                 case .failure(_):
                     let fail = "해당 사용자 이름은 이미 존재합니다."
@@ -504,7 +512,7 @@ final class APIManager {
     let parameter = ["elevator" : "true", "veranda" : "false" ]
     
     let testImgData = UIImage(named: "SaleMainImage")!.jpegData(compressionQuality: 0.1)!
-let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1)!
+    let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1)!
     
     AF.upload(multipartFormData: { (MultipartFormData) in
       MultipartFormData.append(testImgData, withName: "image", fileName: "\(Array(1111...2222).randomElement()).jpeg", mimeType: "image/jpeg")
@@ -558,10 +566,18 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         let parameter = ["post" : complexPk]
         AF.request( baseURL + "/members/recentlyComplex/", method: .post, parameters: parameter, headers: header )
-            .responseData { (response) in
-                guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
-                guard let message = json["message"] as? String else { return }
-                completion(message)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let message = json["message"].stringValue
+                    completion(message)
+                case .failure(let error):
+                    print(error)
+                }
+//                guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+//                guard let message = json["message"] as? String else { return }
+//                completion(message)
             }
     }
     
