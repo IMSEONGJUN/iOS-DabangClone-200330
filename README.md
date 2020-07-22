@@ -20,8 +20,8 @@
   - Framework : UIKit, CoreLocation, RxSwift
   - Library : FBSDKCoreKit, FBSDKLoginKit, FBSDKShareKit, SnapKit, RxCocoa, RxViewController, Alamofire, Then, Kingfisher, SwiftSVG, SDWebImage, MultiSlider, SwiftyJSON, KeychainSwift, DKImagePickerController, Gedatsu, GoogleMaps
 - 팀원 : 5명( iOS 4명 + Backend 1명)
-- 맡은 역할 :
-- 성과 :
+- 맡은 역할 : 전체 4개의 탭 중에서 관심탭을 구현하였으며, 싱글톤으로 APIManager 클래스 구조 설계. 
+- 성과 : 
 - 아쉬운 점 :
 
 ## Design
