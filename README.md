@@ -22,13 +22,17 @@
 - 성과 :
 - 아쉬운 점 :
 
+## 협업
+
+- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflic -> 풀 리퀘스트 -> 병합 프로세스로 진행
+
+![GitKraken.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuamg4n7g30dw0a41kz.gif)
+
 ## Design
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![화면 기록 2020-07-22 오후 4.11.33.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzt6mjwugg30d10dwqvg.gif)
-
-
+![video.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzt6mjwugg30d10dwqvg.gif)
 
 ## Implementation
 
@@ -80,11 +84,6 @@
 
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuirhiguj30u01k9kff.jpg" alt="스크린샷 2020-07-22 오후 5.38.00" style="zoom:33%;" />
 
-## 협업
-
-- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflic -> 풀 리퀘스트 -> 병합 프로세스로 진행
-
-![GitKraken.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuamg4n7g30dw0a41kz.gif)
 
 
 
