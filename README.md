@@ -20,8 +20,13 @@
   - Framework : UIKit, CoreLocation, RxSwift
   - Library : FBSDKCoreKit, FBSDKLoginKit, FBSDKShareKit, SnapKit, RxCocoa, RxViewController, Alamofire, Then, Kingfisher, SwiftSVG, SDWebImage, MultiSlider, SwiftyJSON, KeychainSwift, DKImagePickerController, Gedatsu, GoogleMaps
 - 팀원 : 5명( iOS 4명 + Backend 1명)
-- 맡은 역할 : 전체 4개의 탭 중에서 관심탭을 구현하였으며, 싱글톤으로 APIManager 클래스 구조 설계. 
-- 성과 : 
+- 맡은 역할 
+  - 매물 비교하기 기능,
+  - 최근 본 방 추가 및 삭제 기능,
+  - 방 찜하기 및 찜하기 해제 기능, 
+  - 최근 본 단지에 포함된 방들을 불러오는 기능을 RxSwift를 사용하여 비동기처리, 
+  - 싱글톤으로 APIManager 클래스 구조 설계. 
+- 성과
 - 아쉬운 점 :
 
 ## Design
