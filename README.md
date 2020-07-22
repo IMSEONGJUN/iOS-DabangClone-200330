@@ -32,10 +32,12 @@
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![화면 기록 2020-07-22 오후 4.11.33.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzt6mjwugg30d10dwqvg.gif)
-
 ![alt-text](https://github.com/IMSEONGJUN/iOS-DabangClone-200330/blob/develop/dabang_gif.gif)
+## 협업
 
+- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflic -> 코드리뷰 -> 풀 리퀘스트 -> 병합 프로세스로 진행
+
+![GitKraken.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuamg4n7g30dw0a41kz.gif)
 ## Implementation
 
 ### Feature
@@ -51,16 +53,9 @@
 
 
 - 소셜 로그인 기능 구현 (Kakao, Apple, Facebook)
-
-
-
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzt8hhpwzg30dw07te08.gif" alt="login.mov" style="zoom:150%;" />
 
 
 
-## 협업
 
-- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflic -> 풀 리퀘스트 -> 병합 프로세스로 진행
-
-![GitKraken.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuamg4n7g30dw0a41kz.gif)
 
