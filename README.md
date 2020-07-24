@@ -21,6 +21,7 @@
   - Library : FBSDKCoreKit, FBSDKLoginKit, FBSDKShareKit, SnapKit, RxCocoa, RxViewController, Alamofire, Then, Kingfisher, SwiftSVG, SDWebImage, MultiSlider, SwiftyJSON, KeychainSwift, DKImagePickerController, Gedatsu, GoogleMaps
 - 팀원 : 5명( iOS 4명 + Backend 1명)
 - 맡은 역할 
+  - 관심탭 전체 UI 및 기능 구현( RxSwift를 사용하여 부분적으로 비동기처리 )
   - 매물 비교하기 기능,
   - 최근 본 방 추가 및 삭제 기능,
   - 방 찜하기 및 찜하기 해제 기능, 
@@ -29,7 +30,7 @@
 - 성과
   + 개인적으로 처음 진행하는 Backend 개발자들과의 협업을 통해 서버와의 데이터 통신을 경험
   + Alamofire, SnapKit, SDWebImage, SwiftyJSON 등 다양한 라이브러리를 적용하여 프로젝트 생산성 향상 및 개인적인 라이브러리 사용능력 향상
-  + 한가지 기능에만 부분적으로 짧게 적용하였지만 RxSwift를 이용하여 비동기처리를 경험한 최초의 프로젝트
+  + 부분적으로 짧게 적용하였지만 RxSwift를 이용하여 비동기처리를 경험한 최초의 프로젝트
 
 ## Design
 
