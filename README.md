@@ -5,7 +5,7 @@
 
 
 # Dabang Clone
->-Please check Develop Branch
+>-Please check Develop Branch to check code
 
 패스트 캠퍼스 iOS School에서 진행했던 Backend School과의 협업 프로젝트 입니다.
 ## Video Link : https://youtu.be/demB9_7O5U4
