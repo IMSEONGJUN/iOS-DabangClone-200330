@@ -56,9 +56,6 @@
 
 
 
-- 소셜 로그인 기능 구현 (Kakao, Apple, Facebook)
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzt8hhpwzg30dw07te08.gif" alt="login.mov" style="zoom:150%;" />
-
 
 
 
