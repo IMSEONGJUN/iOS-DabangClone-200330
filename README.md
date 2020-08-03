@@ -39,7 +39,7 @@
 ![alt-text](https://github.com/IMSEONGJUN/iOS-DabangClone-200330/blob/develop/dabang_gif.gif)
 ## 협업
 
-- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflic -> 코드리뷰 -> 풀 리퀘스트 -> 병합 프로세스로 진행
+- Github : 최상위 Organization을 기반으로 각자 작업한 뒤 Solve Conflict -> 코드리뷰 -> 풀 리퀘스트 -> 병합 프로세스로 진행
 
 ![GitKraken.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuamg4n7g30dw0a41kz.gif)
 ## Implementation
